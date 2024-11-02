@@ -47,7 +47,6 @@ function loadPlayers() {
     .then(response => response.json())
     .then(data => {
       console.log("선수 추가 성공:", data);
-      // 선수 추가 후 필드 초기화
       document.getElementById("new-name").value = "";
       document.getElementById("new-position").value = "";
       document.getElementById("new-career-start").value = "";
