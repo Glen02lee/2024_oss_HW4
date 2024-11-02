@@ -21,13 +21,23 @@ function loadPlayers() {
 }
 
 function displayPlayers(players) {
-  const playerList = document.getElementById("searched-player-list");
+  const playerList = document.getElementById("player-list");
   playerList.innerHTML = "";
 
   players.forEach(player => {
       const playerItem = document.createElement("p");
       playerItem.textContent = `ID: ${player.id}, 이름: ${player.name}, 포지션: ${player.position}, 경력: ${player.career_start} - ${player.career_end}`;
       playerList.appendChild(playerItem);
+  });
+}
+function displaySearchedPlayers(players) {
+  const searchedPlayerList = document.getElementById("searched-player-list");
+  searchedPlayerList.innerHTML = "";
+
+  players.forEach(player => {
+      const playerItem = document.createElement("p");
+      playerItem.textContent = `ID: ${player.id}, 이름: ${player.name}, 포지션: ${player.position}, 경력: ${player.career_start} - ${player.career_end}`;
+      searchedPlayerList.appendChild(playerItem);
   });
 }
 
