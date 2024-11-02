@@ -21,7 +21,7 @@ function loadPlayers() {
 }
 
 function displayPlayers(players) {
-  const playerList = document.getElementById("player-list");
+  const playerList = document.getElementById("searched-player-list");
   playerList.innerHTML = "";
 
   players.forEach(player => {
