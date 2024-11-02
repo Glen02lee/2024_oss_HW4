@@ -2,27 +2,43 @@ const apiURL = "http://localhost:3000/players";
 let isPlayerListVisible = false;
 
 function loadPlayers() {
-    const playerList = document.getElementById("player-list");
-    
-    if (isPlayerListVisible) {
+  const playerList = document.getElementById("player-list");
+
+  if (isPlayerListVisible) {
       playerList.style.display = "none";
       isPlayerListVisible = false;
-    } else {
+  } else {
       fetch("http://localhost:3000/players")
-        .then(response => response.json())
-        .then(players => {
-          playerList.innerHTML = "";
-          players.forEach(player => {
-            const playerItem = document.createElement("p");
-            playerItem.textContent = `ID: ${player.id}, 이름: ${player.name}, 포지션: ${player.position}, 경력: ${player.career_start} - ${player.career_end}`;
-            playerList.appendChild(playerItem);
-          });
-          playerList.style.display = "block"; 
-          isPlayerListVisible = true;
-        })
-        .catch(error => console.error("선수 목록을 불러오는 중 오류 발생:", error));
-    }
+          .then(response => response.json())
+          .then(players => {
+              allPlayers = players;
+              displayPlayers(players);
+              playerList.style.display = "block";
+              isPlayerListVisible = true;
+          })
+          .catch(error => console.error("선수 목록을 불러오는 중 오류 발생:", error));
   }
+}
+
+function displayPlayers(players) {
+  const playerList = document.getElementById("player-list");
+  playerList.innerHTML = "";
+
+  players.forEach(player => {
+      const playerItem = document.createElement("p");
+      playerItem.textContent = `ID: ${player.id}, 이름: ${player.name}, 포지션: ${player.position}, 경력: ${player.career_start} - ${player.career_end}`;
+      playerList.appendChild(playerItem);
+  });
+}
+
+function searchPlayers() {
+  const searchTerm = document.getElementById("search").value.toLowerCase();
+  const filteredPlayers = allPlayers.filter(player =>
+      player.name.toLowerCase().includes(searchTerm)
+  );
+  displayPlayers(filteredPlayers);
+}
+
 
   function addPlayer() {
     const name = document.getElementById("new-name").value;
